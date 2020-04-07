@@ -70,7 +70,7 @@ def gen_paths(number, difficulty):
     while len(paths) < number:
         dungeon = dungeons[randint(0, len(dungeons))-1]
         path = dungeon.paths[randint(0, len(dungeon.paths))-1]
-        if path not in paths and path.difficulty == difficulty:
+        if path not in paths and path.difficulty == difficulty and path != arah_s:
             paths.append(path)
             print("    {:20s} - Path {:d} ({:s})".format(dungeon.name, path.number, path.name))
     return paths
