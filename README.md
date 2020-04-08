@@ -20,6 +20,7 @@ optional arguments:
   -H HARD, --hard HARD  number of hard paths to roll (default 1)
 ```
 
+```
 Easy dungeons:
     Ascalonian Catacombs - Path 0 (Story)
     Ascalonian Catacombs - Path 1 (Hodgins)
@@ -58,4 +59,4 @@ Hard dungeons:
     Ruined City of Arah  - Path 3 (Forgotten)
     Ruined City of Arah  - Path 4 (Seer)
     Twilight Arbor       - Path 3 (Aetherpath)
-
+```
