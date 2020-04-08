@@ -13,19 +13,26 @@ default_hard_paths = 1
 dungeons = [ac, cm, ta, se, hotw, coe, cof, arah] # list of all dungeons
 forbidden_paths = [arah_s] # paths that are excluded from dungeon rolls
 
-# Pick a random dungeon, pick a random path, check its difficulty and if valid add it to paths
-# paths is a list of DungeonPaths of the given difficulty
-def gen_paths(quantity, difficulty):
-    paths = []
-    dungeonpaths = []
-    while len(paths) < quantity:
-        dungeon = dungeons[randint(0, len(dungeons))-1]
-        path = dungeon.paths[randint(0, len(dungeon.paths))-1]
-        if path not in paths and path not in forbidden_paths and path.difficulty == difficulty:
-            paths.append(path)
-            dungeonpaths.append(DungeonPath(dungeon, path))
-    dungeonpaths.sort(key = lambda x: (x.dungeon.name, x.path.number))
-    return dungeonpaths
+
+# List out available dungeons of the desired difficulty and then pick one/some at random
+def gen_paths(desired_quantity, desired_difficulty):
+    rolled_dungeonpaths = []
+    available_dungeonpaths = []
+
+    # Generate list of available dungeonpaths
+    for dungeon in dungeons:
+        for path in dungeon.paths:
+            if path.difficulty == desired_difficulty and path not in forbidden_paths:
+                available_dungeonpaths.append(DungeonPath(dungeon, path))
+
+    # Roll on list of available dungeonpaths
+    while len(rolled_dungeonpaths) < desired_quantity:
+        i = randint(0, len(available_dungeonpaths)-1)
+        rolled_dungeonpaths.append(available_dungeonpaths[i])
+        del available_dungeonpaths[i]
+
+    # Return list of dungeonpaths sorted alphabetically by dungeon name and then in ascending order of path number
+    return sorted(rolled_dungeonpaths, key = lambda x: (x.dungeon.name, x.path.number))
 
 # Iterate over list of dungeonpaths and print them
 def print_dungeonpaths(dungeonpaths):
@@ -61,13 +68,13 @@ def forbid_paths(forbid_story, allow_arah):
         forbidden_paths.remove(arah_s)
 
 # Count allowed paths by difficulty
-def count_paths(dungeons):
-    path_totals = {1 : 0, 2: 0, 3:  0}
+def count_paths_by_difficulty(dungeons):
+    difficulty_totals = {1 : 0, 2: 0, 3:  0}
     for dungeon in dungeons:
         for path in dungeon.paths:
             if path not in forbidden_paths:
-                path_totals[path.difficulty]+=1
-    return path_totals
+                difficulty_totals[path.difficulty]+=1
+    return difficulty_totals
 
 def main():
     seed()
@@ -99,15 +106,15 @@ def main():
     args = parser.parse_args()
 
     forbid_paths(args.story, args.arah)
-    path_totals = count_paths(dungeons)
+    path_difficulty_totals = count_paths_by_difficulty(dungeons)
 
     # Set quantity of paths to max number of paths if quantity exceeds number of available paths
-    if args.easy > path_totals[1]:
-        args.easy = path_totals[1]
-    if args.medium > path_totals[2]:
-        args.medium = path_totals[2]
-    if args.hard > path_totals[3]:
-        args.hard = path_totals[3]
+    if args.easy > path_difficulty_totals[1]:
+        args.easy = path_difficulty_totals[1]
+    if args.medium > path_difficulty_totals[2]:
+        args.medium = path_difficulty_totals[2]
+    if args.hard > path_difficulty_totals[3]:
+        args.hard = path_difficulty_totals[3]
 
     # ROLL DUNGEONS!!!
     easy_paths = gen_paths(args.easy, 1)
