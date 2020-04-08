@@ -80,8 +80,8 @@ arah_4 = Path("Seer",      4, 3, 80)
 arah = Dungeon("Ruined City of Arah", [arah_s, arah_1, arah_2, arah_3, arah_4])
 
 dungeons = [ac, cm, ta, se, hotw, coe, cof, arah]
-forbidden_paths = [arah_s]
 
+forbidden_paths = [arah_s]
 # Pick a random dungeon, pick a random path, check its difficulty and if valid add it to paths
 # paths is a list of DungeonPaths of the given difficulty
 def gen_paths(quantity, difficulty):
@@ -120,6 +120,15 @@ def print_discord_message(easy_paths, medium_paths, hard_paths):
         print("Hard dungeon{}:".format("" if len(hard_paths) == 1 else "s"))
         print_dungeonpaths(hard_paths)
 
+def forbid_paths(forbid_story, allow_arah):
+    if forbid_story:
+        for dungeon in dungeons:
+            for path in dungeon.paths:
+                if path.number == 0 and path not in forbidden_paths:
+                    forbidden_paths.append(path)
+    if allow_arah:
+        forbidden_paths.remove(arah_s)
+
 def count_paths(dungeons):
     # 1 = easy, 2 = medium, 3 = hard
     path_totals = {1 : 0, 2: 0, 3:  0}
@@ -131,32 +140,45 @@ def count_paths(dungeons):
 
 def main():
     seed()
-    path_totals = count_paths(dungeons)
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "-s", "--story",
+        action="store_false",
+        default=True,
+        help="include story paths (except arah)")
+    parser.add_argument(
+        "-a", "--arah",
+        action="store_true",
+        help="include arah story path")
+    parser.add_argument(
         "-e", "--easy",
         type=int,
-        choices=range(0, path_totals[1]),
-        metavar="{{0..{}}}".format(path_totals[1]),
         default=default_easy_paths,
         help="number of easy paths to roll (default {})".format(default_easy_paths))
     parser.add_argument(
         "-m", "--medium",
         type=int,
-        choices=range(0, path_totals[2]),
         default=default_medium_paths,
-        metavar="{{0..{}}}".format(path_totals[2]),
         help="number of medium paths to roll (default {})".format(default_medium_paths))
     parser.add_argument(
         "-H", "--hard",
         type=int,
-        choices=range(0, path_totals[3]),
-        metavar="{{0..{}}}".format(path_totals[3]),
         default=default_hard_paths,
         help="number of hard paths to roll (default {})".format(default_hard_paths))
 
     args = parser.parse_args()
+
+    forbid_paths(args.story, args.arah)
+    path_totals = count_paths(dungeons)
+
+    # Set quantity of paths to max number of paths if quantity exceeds number of available paths
+    if args.easy > path_totals[1]:
+        args.easy = path_totals[1]
+    if args.medium > path_totals[2]:
+        args.medium = path_totals[2]
+    if args.hard > path_totals[3]:
+        args.hard = path_totals[3]
 
     easy_paths = gen_paths(args.easy, 1)
     medium_paths = gen_paths(args.medium, 2)
