@@ -28,7 +28,6 @@ default_easy_paths = 3
 default_medium_paths = 2
 default_hard_paths = 1
 
-
 ac_s = Path("Story",       0, 1, 30)
 ac_1 = Path("Hodgins",     1, 1, 35)
 ac_2 = Path("Detha",       2, 2, 35)
@@ -71,7 +70,6 @@ coe_2 = Path("Teleporter", 2, 2, 80)
 coe_3 = Path("Front Door", 3, 1, 80)
 coe = Dungeon("Crucibal of Eternity", [coe_s, coe_1, coe_2, coe_3])
 
-
 arah_s = Path("Story",     0, 3, 80)
 arah_1 = Path("Jotun",     1, 3, 80)
 arah_2 = Path("Mursaat",   2, 3, 80)
@@ -80,8 +78,8 @@ arah_4 = Path("Seer",      4, 3, 80)
 arah = Dungeon("Ruined City of Arah", [arah_s, arah_1, arah_2, arah_3, arah_4])
 
 dungeons = [ac, cm, ta, se, hotw, coe, cof, arah]
-
 forbidden_paths = [arah_s]
+
 # Pick a random dungeon, pick a random path, check its difficulty and if valid add it to paths
 # paths is a list of DungeonPaths of the given difficulty
 def gen_paths(quantity, difficulty):
@@ -100,7 +98,6 @@ def gen_paths(quantity, difficulty):
 def print_dungeonpaths(dungeonpaths):
  for dungeonpath in dungeonpaths:
     print("    {}".format(dungeonpath.str()))
-
 
 def print_discord_message(easy_paths, medium_paths, hard_paths):
     today = datetime.date.today()
@@ -140,7 +137,6 @@ def count_paths(dungeons):
 
 def main():
     seed()
-
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-s", "--story",
@@ -166,7 +162,6 @@ def main():
         type=int,
         default=default_hard_paths,
         help="number of hard paths to roll (default {})".format(default_hard_paths))
-
     args = parser.parse_args()
 
     forbid_paths(args.story, args.arah)
@@ -180,6 +175,7 @@ def main():
     if args.hard > path_totals[3]:
         args.hard = path_totals[3]
 
+    # ROLL DUNGEONS!!!
     easy_paths = gen_paths(args.easy, 1)
     medium_paths = gen_paths(args.medium, 2)
     hard_paths = gen_paths(args.hard, 3)
