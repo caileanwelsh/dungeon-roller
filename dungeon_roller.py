@@ -33,13 +33,14 @@ def gen_paths(desired_quantity, desired_difficulty):
     # Return list of dungeonpaths sorted alphabetically by dungeon name and then in ascending order of path number
     return sorted(rolled_dungeonpaths, key = lambda x: (x.dungeon.name, x.path.number))
 
-# Iterate over list of dungeonpaths and print them
+# Print dungeon paths so that they look pretty
 def print_dungeonpaths(dungeonpaths):
  for dungeonpath in dungeonpaths:
     print("    {}".format(dungeonpath.str()))
 
 def print_discord_message(easy_paths, medium_paths, hard_paths):
     today = datetime.date.today()
+    # next friday is today if today is friday
     next_friday = today + datetime.timedelta((4-today.weekday()) % 7)
     print("**— Guild Dungeons {} —**".format(next_friday))
     print("*Gather in the Guild Hall to form groups at 20:00 CET/CEST*")
@@ -56,7 +57,7 @@ def print_discord_message(easy_paths, medium_paths, hard_paths):
         print("Hard dungeon{}:".format("" if len(hard_paths) == 1 else "s"))
         print_dungeonpaths(hard_paths)
 
-# Remove story paths or allow arah from rolls
+# Remove story paths from possible rolls or allow arah story
 def forbid_paths(forbid_story, allow_arah):
     if forbid_story:
         for dungeon in dungeons:
@@ -67,7 +68,9 @@ def forbid_paths(forbid_story, allow_arah):
         forbidden_paths.remove(arah_s)
 
 # Count allowed paths by difficulty
+# Return dictionary of {difficulty : quantity}
 def count_paths_by_difficulty(dungeons):
+    # 1: easy, 2: medium, 3: hard
     difficulty_totals = {1 : 0, 2: 0, 3:  0}
     for dungeon in dungeons:
         for path in dungeon.paths:
