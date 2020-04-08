@@ -93,7 +93,7 @@ def gen_paths(quantity, difficulty):
         if path not in paths and path not in forbidden_paths and path.difficulty == difficulty:
             paths.append(path)
             dungeonpaths.append(DungeonPath(dungeon, path))
-    dungeonpaths.sort(key = lambda x: x.dungeon.name)
+    dungeonpaths.sort(key = lambda x: (x.dungeon.name, x.path.number))
     return dungeonpaths
 
 # Iterate over list of dungeonpaths and print them
