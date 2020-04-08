@@ -134,9 +134,27 @@ def main():
     path_totals = count_paths(dungeons)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-e", "--easy", type=int, choices=range(0, path_totals[1]), default=default_easy_paths, help="number of easy paths to roll (default {})".format(default_easy_paths))
-    parser.add_argument("-m", "--medium", type=int, choices=range(0, path_totals[2]), default=default_easy_paths, help="number of medium paths to roll (default {})".format(default_medium_paths))
-    parser.add_argument("-H", "--hard", type=int, choices=range(0, path_totals[3]), default=default_easy_paths, help="number of hard paths to roll (default {})".format(default_hard_paths))
+    parser.add_argument(
+        "-e", "--easy",
+        type=int,
+        choices=range(0, path_totals[1]),
+        metavar="{{0..{}}}".format(path_totals[1]),
+        default=default_easy_paths,
+        help="number of easy paths to roll (default {})".format(default_easy_paths))
+    parser.add_argument(
+        "-m", "--medium",
+        type=int,
+        choices=range(0, path_totals[2]),
+        default=default_easy_paths,
+        metavar="{{0..{}}}".format(path_totals[2]),
+        help="number of medium paths to roll (default {})".format(default_medium_paths))
+    parser.add_argument(
+        "-H", "--hard",
+        type=int,
+        choices=range(0, path_totals[3]),
+        metavar="{{0..{}}}".format(path_totals[3]),
+        default=default_easy_paths,
+        help="number of hard paths to roll (default {})".format(default_hard_paths))
 
     args = parser.parse_args()
 
