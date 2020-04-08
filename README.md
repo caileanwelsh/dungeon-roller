@@ -1,5 +1,9 @@
 # dungeon-roller
-A dungeon roller for Guild Wars 2 that produces a discord-ready event announcement. Rolls 3 easy, 2 medium, and 1 hard dungeon by default though this can be changed using optional arguments.
+A dungeon roller for Guild Wars 2 that produces a discord-ready event announcement. The event will always be for the next Friday (if today is Friday, it shows the date for today).
+
+Rolls 3 easy, 2 medium, and 1 hard by default though this can be changed using optional arguments.
+
+You can include story dungeons and arah story in the rolls with the `-s` and `-a` optional flags.
 
 Dungeon difficulty is assessed on the assumption that at least one knowledgeable person will be in the dungeon group.
 
