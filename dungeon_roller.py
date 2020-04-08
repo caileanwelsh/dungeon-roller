@@ -146,11 +146,11 @@ def main():
         "-s", "--story",
         action="store_false",
         default=True,
-        help="include story paths (except arah)")
+        help="include story paths in possible rolls (except arah)")
     parser.add_argument(
         "-a", "--arah",
         action="store_true",
-        help="include arah story path")
+        help="include arah story path in possible rolls")
     parser.add_argument(
         "-e", "--easy",
         type=int,
