@@ -28,8 +28,7 @@ def gen_paths(desired_quantity, desired_difficulty):
     # Roll on list of available dungeonpaths
     while len(rolled_dungeonpaths) < desired_quantity:
         i = randint(0, len(available_dungeonpaths)-1)
-        rolled_dungeonpaths.append(available_dungeonpaths[i])
-        del available_dungeonpaths[i]
+        rolled_dungeonpaths.append(available_dungeonpaths.pop(i))
 
     # Return list of dungeonpaths sorted alphabetically by dungeon name and then in ascending order of path number
     return sorted(rolled_dungeonpaths, key = lambda x: (x.dungeon.name, x.path.number))
