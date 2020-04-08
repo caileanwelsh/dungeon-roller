@@ -19,3 +19,43 @@ optional arguments:
                         number of medium paths to roll (default 2)
   -H HARD, --hard HARD  number of hard paths to roll (default 1)
 ```
+
+Easy dungeons:
+    Ascalonian Catacombs - Path 0 (Story)
+    Ascalonian Catacombs - Path 1 (Hodgins)
+    Ascalonian Catacombs - Path 3 (Tzark)
+    Caudecus Manor       - Path 0 (Story)
+    Caudecus Manor       - Path 1 (Asura)
+    Citadel of Flame     - Path 0 (Story)
+    Citadel of Flame     - Path 1 (Ferrah)
+    Citadel of Flame     - Path 2 (Magg)
+    Crucibal of Eternity - Path 0 (Story)
+    Crucibal of Eternity - Path 1 (Submarine)
+    Crucibal of Eternity - Path 3 (Front Door)
+    Honor of the Waves   - Path 1 (Butcher)
+    Sorrow's Embrace     - Path 0 (Story)
+    Sorrow's Embrace     - Path 1 (Fergg)
+    Sorrow's Embrace     - Path 3 (Koptev)
+    Twilight Arbor       - Path 0 (Story)
+    Twilight Arbor       - Path 1 (Leurent)
+    Twilight Arbor       - Path 2 (Vevina)
+
+Medium dungeons:
+    Ascalonian Catacombs - Path 2 (Detha)
+    Caudecus Manor       - Path 2 (Seraph)
+    Caudecus Manor       - Path 3 (Butler)
+    Citadel of Flame     - Path 3 (Rhiannon)
+    Crucibal of Eternity - Path 2 (Teleporter)
+    Honor of the Waves   - Path 0 (Story)
+    Honor of the Waves   - Path 2 (Plunderer)
+    Honor of the Waves   - Path 3 (Zealot)
+    Sorrow's Embrace     - Path 2 (Rasolov)
+
+Hard dungeons:
+    Ruined City of Arah  - Path 0 (Story)
+    Ruined City of Arah  - Path 1 (Jotun)
+    Ruined City of Arah  - Path 2 (Mursaat)
+    Ruined City of Arah  - Path 3 (Forgotten)
+    Ruined City of Arah  - Path 4 (Seer)
+    Twilight Arbor       - Path 3 (Aetherpath)
+
