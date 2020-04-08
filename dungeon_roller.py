@@ -145,7 +145,7 @@ def main():
         "-m", "--medium",
         type=int,
         choices=range(0, path_totals[2]),
-        default=default_easy_paths,
+        default=default_medium_paths,
         metavar="{{0..{}}}".format(path_totals[2]),
         help="number of medium paths to roll (default {})".format(default_medium_paths))
     parser.add_argument(
@@ -153,7 +153,7 @@ def main():
         type=int,
         choices=range(0, path_totals[3]),
         metavar="{{0..{}}}".format(path_totals[3]),
-        default=default_easy_paths,
+        default=default_hard_paths,
         help="number of hard paths to roll (default {})".format(default_hard_paths))
 
     args = parser.parse_args()
