@@ -8,16 +8,17 @@ You can include story dungeons and Arah story in the rolls with the `-s` and `-a
 Dungeon difficulty is assessed on the assumption that at least one knowledgeable person will be in the dungeon group.
 
 ```
-usage: dungeon_roller.py [-h] [-s] [-a] [-e EASY] [-m MEDIUM] [-H HARD]
+usage: dungeon_roller.py [-h] [-s] [-a] [-e EASY] [-m MEDIUM] [-H HARD] [-l]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -s, --story           include story paths (except arah)
-  -a, --arah            include arah story path
+  -s, --story           include story paths in possible rolls (except arah)
+  -a, --arah            include arah story path in possible rolls
   -e EASY, --easy EASY  number of easy paths to roll (default 3)
   -m MEDIUM, --medium MEDIUM
                         number of medium paths to roll (default 2)
   -H HARD, --hard HARD  number of hard paths to roll (default 1)
+  -l, --list            list all available dungeon paths
 ```
 
 ```
