@@ -1,5 +1,5 @@
 # dungeon-roller
-A dungeon roller for Guild Wars 2 that produces a discord-ready event announcement. The event will always be for the next Friday (if today is Friday, it shows the date for today).
+A dungeon roller for Guild Wars 2 that produces a Discord-ready event announcement. The event will always be for the next Friday (if today is Friday, it shows the date for today).
 
 Rolls 3 easy, 2 medium, and 1 hard by default though this can be changed using optional arguments.
 
@@ -60,5 +60,3 @@ Hard dungeons:
     Ruined City of Arah  - Path 4 (Seer)
     Twilight Arbor       - Path 3 (Aetherpath)
 ```
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
