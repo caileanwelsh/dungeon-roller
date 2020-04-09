@@ -14,6 +14,8 @@ easy_description = "Easy"
 medium_description = "Medium"
 hard_description = "Hard"
 
+donegeons = [] # list of dungeons that have already been printed, used for deciding if to print waypoint link
+
 def find_available_paths(allow_story, allow_arah, dungeons):
     available_dungeonpaths = [[], [], []]
     for dungeon in dungeons:
@@ -39,7 +41,12 @@ def print_dungeonpaths(dungeonpaths, description):
         print("{} dungeon{}:".format(description, "" if len(dungeonpaths) == 1 else "s"))
 
         for dungeonpath in dungeonpaths:
-            print((" " * 3),"{}".format(dungeonpath.str()))
+            print((" " * 3),"{}".format(dungeonpath.str()), end="")
+            if dungeonpath.dungeon not in donegeons:
+                print("\t", dungeonpath.dungeon.waypoint)
+            else:
+                print()
+            donegeons.append(dungeonpath.dungeon)
         print()
 
 def print_discord_message(easy_paths, medium_paths, hard_paths, date, time):
