@@ -41,7 +41,8 @@ def print_dungeonpaths(dungeonpaths, description):
         print("{} dungeon{}:".format(description, "" if len(dungeonpaths) == 1 else "s"))
 
         for dungeonpath in dungeonpaths:
-            print((" " * 3),"{}".format(dungeonpath.str()), end="")
+            print((" " * 3),"{}".format(dungeonpath.str()), end="") # remove newline from print()
+            # print the waypoint code if it hasn't already been printed
             if dungeonpath.dungeon not in donegeons:
                 print("\t", dungeonpath.dungeon.waypoint)
             else:
