@@ -29,7 +29,7 @@ def find_available_paths(allow_story, allow_arah, dungeons):
 
 def roll_dungeonpaths(desired_quantity, available_dungeonpaths):
     rolled_dungeonpaths = []
-    while len(rolled_dungeonpaths) <= desired_quantity:
+    while len(rolled_dungeonpaths) < desired_quantity:
         i = randint(0, len(available_dungeonpaths)-1)
         rolled_dungeonpaths.append(available_dungeonpaths.pop(i))
 
@@ -67,11 +67,11 @@ def roll_dungeons(easy, medium, hard, available_dungeonpathslist):
 
     # Set quantity of paths to max number of paths if quantity exceeds number of available paths
     if easy > len(available_dungeonpathslist[0])-1:
-        easy = len(available_dungeonpathslist[0])-1
+        easy = len(available_dungeonpathslist[0])
     if medium > len(available_dungeonpathslist[1])-1:
-        medium = len(available_dungeonpathslist[1])-1
+        medium = len(available_dungeonpathslist[1])
     if hard > len(available_dungeonpathslist[2])-1:
-        hard = len(available_dungeonpathslist[2])-1
+        hard = len(available_dungeonpathslist[2])
 
     # ROLL DUNGEONS!!!
     easy_paths = roll_dungeonpaths(easy, available_dungeonpathslist[0])
