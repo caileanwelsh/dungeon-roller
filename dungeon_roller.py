@@ -29,7 +29,7 @@ def find_available_paths(allow_story, allow_arah, dungeons):
 
 def roll_dungeonpaths(desired_quantity, available_dungeonpaths):
     rolled_dungeonpaths = []
-    while len(rolled_dungeonpaths) < desired_quantity:
+    while len(rolled_dungeonpaths) <= desired_quantity:
         i = randint(0, len(available_dungeonpaths)-1)
         rolled_dungeonpaths.append(available_dungeonpaths.pop(i))
 
