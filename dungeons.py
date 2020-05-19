@@ -20,6 +20,9 @@ class DungeonPath:
     def str(self):
         return "{:20s} - Path {:d} ({:s})".format(self.dungeon.name, self.path.number, self.path.name)
 
+    def str_wpt(self):
+        return "{:42s} {}".format(DungeonPath.str(self), self.dungeon.waypoint)
+
 ac_s = Path("Story",       0, 0, 20)
 ac_1 = Path("Hodgins",     1, 0, 25)
 ac_2 = Path("Detha",       2, 1, 25)
@@ -33,8 +36,8 @@ cm_3 = Path("Butler",      3, 1, 45)
 cm = Dungeon("Caudecus Manor", [cm_s, cm_1, cm_2, cm_3], "[&BPoAAAA=]")
 
 ta_s = Path("Story",       0, 0, 50)
-ta_1 = Path("Leurent",     1, 0, 55)
-ta_2 = Path("Vevina",      2, 0, 55)
+ta_1 = Path("Up",     1, 0, 55)
+ta_2 = Path("Forward",      2, 0, 55)
 ta_3 = Path("Aetherpath",  3, 2, 55)
 ta = Dungeon("Twilight Arbor", [ta_s, ta_1, ta_2, ta_3], "[&BEEFAAA=]")
 
@@ -68,5 +71,3 @@ arah_2 = Path("Mursaat",   2, 2, 80)
 arah_3 = Path("Forgotten", 3, 2, 80)
 arah_4 = Path("Seer",      4, 2, 80)
 arah = Dungeon("Ruined City of Arah", [arah_s, arah_1, arah_2, arah_3, arah_4], "[&BCADAAA=]")
-
-
