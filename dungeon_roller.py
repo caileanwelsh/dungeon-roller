@@ -12,6 +12,7 @@ default_hard_paths = 1
 
 donegeons = [] # list of dungeons that have already been printed, used for deciding if to print waypoint link
 
+# Returns list of lists: first list is available easy dungeons, second is available medium, third is available hard
 def find_available_paths(allow_story, allow_arah, dungeons):
     available_dungeonpaths = [[], [], []]
     for dungeon in dungeons:
@@ -23,13 +24,13 @@ def find_available_paths(allow_story, allow_arah, dungeons):
             available_dungeonpaths[path.difficulty].append(DungeonPath(dungeon, path))
     return available_dungeonpaths
 
+# Returns list of dungeonpaths sorted alphabetically by dungeon name and then in ascending order of path number
 def roll_dungeonpaths(desired_quantity, available_dungeonpaths):
     rolled_dungeonpaths = []
     while len(rolled_dungeonpaths) < desired_quantity:
         i = randint(0, len(available_dungeonpaths)-1)
         rolled_dungeonpaths.append(available_dungeonpaths.pop(i))
 
-    # Return list of dungeonpaths sorted alphabetically by dungeon name and then in ascending order of path number
     return sorted(rolled_dungeonpaths, key = lambda dungeonpath: (dungeonpath.dungeon.name, dungeonpath.path.number))
 
 def print_dungeonpaths(dungeonpaths, description):
