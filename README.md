@@ -1,5 +1,5 @@
 # dungeon-roller
-A dungeon roller for Guild Wars 2 that produces a Discord-ready event announcement. The event will always be for the next Friday (if today is Friday, it shows the date for today).
+A dungeon roller for Guild Wars 2 that produces a Discord-ready message segment.
 
 Rolls 3 easy, 2 medium, and 1 hard by default though this can be changed using optional arguments.
 
