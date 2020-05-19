@@ -10,10 +10,6 @@ default_easy_paths = 3
 default_medium_paths = 2
 default_hard_paths = 1
 
-easy_description = "Easy"
-medium_description = "Medium"
-hard_description = "Hard"
-
 donegeons = [] # list of dungeons that have already been printed, used for deciding if to print waypoint link
 
 def find_available_paths(allow_story, allow_arah, dungeons):
@@ -37,31 +33,36 @@ def roll_dungeonpaths(desired_quantity, available_dungeonpaths):
     return sorted(rolled_dungeonpaths, key = lambda dungeonpath: (dungeonpath.dungeon.name, dungeonpath.path.number))
 
 def print_dungeonpaths(dungeonpaths, description):
-    if len(dungeonpaths) > 0:
-        print("{} dungeon{}:".format(description, "" if len(dungeonpaths) == 1 else "s"))
+    print("{} dungeon{}:".format(description, "" if len(dungeonpaths) == 1 else "s"))
 
-        for dungeonpath in dungeonpaths:
-            print((" " * 3),"{}".format(dungeonpath.str()), end="") # remove newline from print()
-            # print the waypoint code if it hasn't already been printed
-            if dungeonpath.dungeon not in donegeons:
-                print("\t", dungeonpath.dungeon.waypoint)
-            else:
-                print()
-            donegeons.append(dungeonpath.dungeon)
+    for dungeonpath in dungeonpaths:
+        dungeon_string = (" " * 3), "{}".format(dungeonpath.str())
+        if dungeonpath.dungeon not in donegeons:
+            print((" " * 3),"{}".format(dungeonpath.str_wpt()))
+        else:
+            print((" " * 3),"{}".format(dungeonpath.str()))
+        donegeons.append(dungeonpath.dungeon)
+
+def print_discord_message(easy_paths, medium_paths, hard_paths):
+    print("```")
+    if easy_paths:
+        print_dungeonpaths(easy_paths, "Easy")
+    if easy_paths and medium_paths:
         print()
-
-def print_discord_message(easy_paths, medium_paths, hard_paths, date, time):
-    print("**— Guild Dungeons {} —**".format(date))
-    print("*Gather in the Guild Hall to form groups at {}*".format(time))
-    print()
-    print_dungeonpaths(easy_paths, easy_description)
-    print_dungeonpaths(medium_paths, medium_description)
-    print_dungeonpaths(hard_paths, hard_description)
+    if medium_paths:
+        print_dungeonpaths(medium_paths, "Medium")
+    if medium_paths and hard_paths:
+        print()
+    if hard_paths:
+        print_dungeonpaths(hard_paths, "Hard")
+    print("```")
 
 def list_all_dungeonpaths(dungeonpathslist):
-    print_dungeonpaths(dungeonpathslist[0], easy_description)
-    print_dungeonpaths(dungeonpathslist[1], medium_description)
-    print_dungeonpaths(dungeonpathslist[2], hard_description)
+    print_dungeonpaths(dungeonpathslist[0], "Easy")
+    print()
+    print_dungeonpaths(dungeonpathslist[1], "Medium")
+    print()
+    print_dungeonpaths(dungeonpathslist[2], "Hard")
 
 def roll_dungeons(easy, medium, hard, available_dungeonpathslist):
 
@@ -78,11 +79,7 @@ def roll_dungeons(easy, medium, hard, available_dungeonpathslist):
     medium_paths = roll_dungeonpaths(medium, available_dungeonpathslist[1])
     hard_paths = roll_dungeonpaths(hard, available_dungeonpathslist[2])
 
-    today = datetime.date.today()
-    # next friday is today if today is friday
-    next_friday = today + datetime.timedelta((4-today.weekday()) % 7)
-
-    print_discord_message(easy_paths, medium_paths, hard_paths, next_friday, "20:00 CET/CEST")
+    print_discord_message(easy_paths, medium_paths, hard_paths)
 
 def main():
     seed()
