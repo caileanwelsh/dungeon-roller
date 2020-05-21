@@ -1,3 +1,5 @@
+import json
+
 class Dungeon:
     def __init__(self, name, paths, waypoint):
         self.name = name
@@ -22,6 +24,11 @@ class DungeonPath:
 
     def str_wpt(self):
         return "{:42s} {}".format(DungeonPath.str(self), self.dungeon.waypoint)
+
+class Dungeons:
+    def __init__(self):
+        with open('dungeons.txt', 'r') as f:
+            self._dungeons = json.load(f)
 
 ac_s = Path("Story",       0, 0, 20)
 ac_1 = Path("Hodgins",     1, 0, 25)

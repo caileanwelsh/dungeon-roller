@@ -5,10 +5,13 @@ import argparse
 from random import seed
 from random import randint
 
+# to be removed
+import json
+
 # DEFAULT NUMBER OF PATHS TO ROLL
-default_easy_paths = 3
-default_medium_paths = 2
-default_hard_paths = 1
+DEFAULT_EASY_PATHS = 3
+DEFAULT_MEDIUM_PATHS = 2
+DEFAULT_HARD_PATHS = 1
 
 donegeons = [] # list of dungeons that have already been printed, used for deciding if to print waypoint link
 
@@ -96,18 +99,18 @@ def main():
     parser.add_argument(
         "-e", "--easy",
         type=int,
-        default=default_easy_paths,
-        help="number of easy paths to roll (default {})".format(default_easy_paths))
+        default=DEFAULT_EASY_PATHS,
+        help="number of easy paths to roll (default {})".format(DEFAULT_EASY_PATHS))
     parser.add_argument(
         "-m", "--medium",
         type=int,
-        default=default_medium_paths,
-        help="number of medium paths to roll (default {})".format(default_medium_paths))
+        default=DEFAULT_MEDIUM_PATHS,
+        help="number of medium paths to roll (default {})".format(DEFAULT_MEDIUM_PATHS))
     parser.add_argument(
         "-H", "--hard",
         type=int,
-        default=default_hard_paths,
-        help="number of hard paths to roll (default {})".format(default_hard_paths))
+        default=DEFAULT_HARD_PATHS,
+        help="number of hard paths to roll (default {})".format(DEFAULT_HARD_PATHS))
     parser.add_argument(
         "-l", "--list",
         action="store_true",
@@ -122,6 +125,32 @@ def main():
     else:
         available_dungeonpaths = find_available_paths(args.story, args.arah, dungeons)
         roll_dungeons(args.easy, args.medium, args.hard, available_dungeonpaths)
+
+    #to be removed
+    #used for converting current objects into python dictionary then subsequent storage as JSON
+    #dungeonsDict = {}
+    #for dungeon in dungeons:
+        #pathsDict = {}
+        #for path in dungeon.paths:
+          #  pathsDict[path.name] = {
+         #       "number" : path.number,
+        #        "difficulty" : path.difficulty,
+      #      }
+       #         "level" : path.level
+     #   dungeonsDict[dungeon.name] = { "waypoint" : dungeon.waypoint }
+    #    dungeonsDict[dungeon.name] = { "paths" : pathsDict}
+
+    #print(dungeonsDict)
+    #print()
+    #print(json.dumps(dungeonsDict))
+
+    #with open('dungeons.txt', 'w') as f:
+     #   f.write(json.dumps(dungeonsDict))
+
+    DUNGEONS = Dungeons()
+    print(DUNGEONS._dungeons)
+
+
 
 if __name__ == "__main__":
     main()
